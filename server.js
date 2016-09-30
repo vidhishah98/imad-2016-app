@@ -8,7 +8,7 @@ app.use(morgan('combined'));
 var content={
     title: 'Article One'
 content:
-  <p>
+  
                     This is my webpage.   This is my webpage.   This is my webpage.   This is my webpage.
                      This is my webpage.   This is my webpage.   This is my webpage.   This is my webpage.
                     <hr>
@@ -20,13 +20,41 @@ content:
                  
                     This is my webpage.   This is my webpage.   This is my webpage.   This is my webpage.
                      This is my webpage.   This is my webpage.   This is my webpage.   This is my webpage.
- </p>
+ 
 
     
     
 };
 
+var htmltemplate={
+    <html>
+    <head>
+        <title>Article one</title>
+  
+    </head>
+    <body>
+        <div class="container">
+        <div>
+            <a href="/">Home</a>
 
+                <h3>Article one</h3>
+                <div>
+                    sep 30,16
+                </div>
+                <div>
+                   <p>
+                   s{content}
+                   </p>
+                </div>
+            
+            
+        </div>
+        
+        </div>
+    </body>
+</html>
+
+}
 
 
 app.get('/', function (req, res) {
