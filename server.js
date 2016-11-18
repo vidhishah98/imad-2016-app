@@ -6,10 +6,10 @@ var app = express();
 app.use(morgan('combined'));
 
 var content = {
-    title:'Article one'
-    heading: 'This is my webpage.'
-    date: sep30,16
-    content:' <p> Vidhi Shah taking the IMAD Course</p>'
+    title:'Article one',
+    heading: 'This is my webpage.',
+    date: 'sep30,16',
+    content: '<p> Vidhi Shah taking the IMAD Course</p>'
 };
 function createTemplate(data)
 {
@@ -17,35 +17,24 @@ function createTemplate(data)
     var date=data.date;
     var heading=data.heading;
     var content=data.content;
-    var htmlTemplate=
+    var htmlTemplate={
     <html>
-    <head>
-        s{title}
-  
-    </head>
     <body>
         <div class="container">
         <div>
-            <a href="/">Home</a>
+        <a href="/">home
 
                 s{heading}
-                <div>
+                
                     s{date}
-                </div>
-                <div>
-                   <p>
-                   s{content}
-                   </p>
-                </div>
-            
-            
-        </div>
         
-        </div>
-    </body>
+                   s{content}
+            
+</div> </div>
+</body>
 </html>
-
 return htmlTemplate;
+
 }
 app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'index.html'));
