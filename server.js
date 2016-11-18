@@ -22,14 +22,14 @@ function createTemplate(data)
     <body>
         <div class="container">
         <div>
-        <a href="/">home
-
+        <a href="/">home</a>
+                <div>
                 s{heading}
                 
                     s{date}
         
                    s{content}
-            
+        </div>    
 </div> </div>
 </body>
 </html>
