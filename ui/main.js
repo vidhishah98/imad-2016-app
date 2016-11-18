@@ -44,8 +44,7 @@ button.onClick = function() {
 };
 
 //submit name
-var nameInput=document.getElementById('name');
-var name=nameInput.value;
+
 var submit=document.getElementById('submit_btn');
 submit.onClick=function() {
     
@@ -74,6 +73,8 @@ ul.innerHTML=list;
     };
     
     //Make the request
+    var nameInput=document.getElementById('name');
+    var name=nameInput.value;
     request.open('GET','http://vidhishah98.imad.hasura-app.io/submit-name?name='+name,true);
    request.send(null);
 };
