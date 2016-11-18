@@ -34,8 +34,8 @@ button.onClick = function() {
               var counter=request.responseText;
               var span=document.getElementById("count");
                 span.innerHTML=counter.toString();
-          }
-      }
+          };
+      };
       //Not done yet
     };
     
@@ -68,7 +68,7 @@ submit.onClick=function() {
    var ul=document.getElementById('namelist');
 ul.innerHTML=list;
              
-          }
+        }
       }
       //Not done yet
     };
