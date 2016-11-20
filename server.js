@@ -8,7 +8,7 @@ var config = {
   database: 'vidhishah98' ,
   host:'db.imad.hasura-app.io',
     port:'5432',
-    password: process.emv.DB.PASSWORD
+    password: process.emv.DB_PASSWORD
 };
 
 
