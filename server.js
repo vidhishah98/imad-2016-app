@@ -8,7 +8,7 @@ var config = {
   database: 'vidhishah98' ,
   host:'db.imad.hasura-app.io',
     port:'5432',
-    password: 	'db-vidhishah98-78047' // error due to DB_PASSWORD
+    password: 	'db-vidhishah98-78047' // error if written DB_PASSWORD
 };
 
 
@@ -16,35 +16,41 @@ var config = {
 var app = express();
 app.use(morgan('combined'));
 
-var articles={
-'article-one':{
-    title: 'Article-one | Vidhi shah',
-    heading: 'Article-one',
-    date:'Sep 5,2016',
-    content:
-            <p>
-                    This is the content of the first article.This is the content of the first article.This is the content of the first article. This is the content of the first article. This is the content of the first article.
-            </p>
+var articles =   {
+            'article-one':
+            {
+                title: 'Article-one | Vidhi shah',
+                heading: 'Article-one',
+                date:'Sep 5,2016',
+                content:'This is my first article.',
+            },
+            'article-two':
+            {
+                    title: 'Article-two | Vidhi shah',
+                    heading: 'Article-two',
+                    date:'Sep 6,2016',
+                    content:'This is the content of my second article.',
+            },
+            'article-three':
+            {
+                    title: 'Article-three | Vidhi shah',
+                    heading: 'Article-three',
+                    date:'Sep 7,2016',
+                    content:  'This is the content of the third article.',
+            },
 };
-'article-two':{
-    title: 'Article-two | Vidhi shah',
-    heading: 'Article-two',
-    date:'Sep 6,2016',
-    content:
-            <p>
-                    This is the content of the second article.This is the content of the second article.This is the content of the second article. This is the content of the second article. This is the second of the first article.
-            </p>
-};
-'article-three':{
-    title: 'Article-three | Vidhi shah',
-    heading: 'Article-three',
-    date:'Sep 7,2016',
-    content:
-            <p>
-                    This is the content of the third article.
-            </p>
-};
-};
+function createTemplate(data){
+    var title=data.title;
+    var date=data.date;
+    var heading=data.heading;
+    var content=data.content;
+    var htmlTemplate = 
+    '<html> <head> <title>${title} </title> <link href="/ui/style.css" rel="stylesheet" /> </head>';
+    '<body><div class="container"><div><a href="/">Home</a></div><hr><h3>${heading}</h3><div>${date.toDateString()}</div>';
+     '<div>${content} </div></div></body></html>';
+    
+        return htmlTemplate;
+}
 
 app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'index.html'));
@@ -73,16 +79,30 @@ counter=counter+1;
 var names=[];
 app.get('/submit-name',function(req,res){   //URL: /submit-name?name=vidhi
    //get the name from the request
-   var name=res.query.name;
+   var name=req.query.name;
    
    names.push(name);
    //JSON: JAVASCRIPT OBJECT NOTATION
    res.send(JSON.stringify(names));
 });
 
-app.get('/article-one', function (req, res) {
-res.send(createTemplate(articleOne));
-    
+app.get('/articles/article-one', function (req, res) {
+    //Article-name=article-one
+    //articles[articleName]=={} content object for article one
+    //SELECT* FROM articles WHERE title= 'article-one'
+    pool.query("SELECT * FROM articles WHERE title= '"+ req.params.articleName +"'", function(err,result){
+        if(err){
+      res.status(500).send(err,toString());
+    } else {
+     if(result.rows.length===0){
+         res.status(404).send('Article not found');
+     }else{
+         var articleData=result.rows[0];
+         res.send(createTemplate(articleData));
+     }
+ }
+       
+    });
 });
 app.get('/article-two', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'article-two.html'));
