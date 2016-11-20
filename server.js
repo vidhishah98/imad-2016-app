@@ -16,6 +16,35 @@ var config = {
 var app = express();
 app.use(morgan('combined'));
 
+var articles={
+'article-one':{
+    title: 'Article-one | Vidhi shah',
+    heading: 'Article-one',
+    date:'Sep 5,2016',
+    content:
+            <p>
+                    This is the content of the first article.This is the content of the first article.This is the content of the first article. This is the content of the first article. This is the content of the first article.
+            </p>
+};
+'article-two':{
+    title: 'Article-two | Vidhi shah',
+    heading: 'Article-two',
+    date:'Sep 6,2016',
+    content:
+            <p>
+                    This is the content of the second article.This is the content of the second article.This is the content of the second article. This is the content of the second article. This is the second of the first article.
+            </p>
+};
+'article-three':{
+    title: 'Article-three | Vidhi shah',
+    heading: 'Article-three',
+    date:'Sep 7,2016',
+    content:
+            <p>
+                    This is the content of the third article.
+            </p>
+};
+};
 
 app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'index.html'));
